@@ -20,6 +20,7 @@ class BingoBoard
   end
 
   def player
+    draw until vertical_match
   end
 
   def draw
@@ -54,13 +55,20 @@ class BingoBoard
     end
   end
 
-  def check_horizontal
+  def vertical_match
+    @bingo_board.each do |row|
+      return row.all? {|num| num == "X"}
+    end
   end
 
-  def check_diagonal
+  def horizontal_match
+
   end
 
-  def check_vertical
+  def diagonal_match
+  end
+
+  def other_diagonal_match
   end
 
   def to_s
@@ -70,7 +78,7 @@ end
 
 board = BingoBoard.new
 
-# p board.to_s
-
 board.draw
+# p board.vertical_match
+board.player
 board.to_s
