@@ -59,6 +59,11 @@ class BingoBoard
   end
 
   def vertical_match
+    x_counter = []
+    @bingo_board.each do |row|
+      x_counter << row[@letter_index] if row[@letter_index] == "X"
+    end
+    "Bingo" if x_counter.length == 5
   end
 
   def diagonal_matches
@@ -78,5 +83,6 @@ end
 
 board = BingoBoard.new
 board.draw
+# board.vertical_match
 board.player
 puts board
