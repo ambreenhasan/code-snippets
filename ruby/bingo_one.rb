@@ -1,3 +1,6 @@
+# Small challenge that places an "X" based on the number
+# that is called
+
 require 'colorize'
 
 class BingoBoard
