@@ -47,18 +47,20 @@ class BingoBoard
     @bingo
   end
 
-  def display_prettily
-    @bingo_board.each { |row| p row }
+  def to_s
+    @bingo_board.map {|row| row.join(" ")}.join("\n")
   end
 end
 
 
 board = BingoBoard.new
 
-board.draw
+50.times do
+  board.draw
 
-puts "Called Column"
-p board.display_column
-puts "~~~~~~~~~~~~"
-puts "Board"
-board.display_prettily
+  puts "Called Column"
+  board.display_column
+  puts "~~~~~~~~~~~~"
+  puts "Board"
+  puts board
+end
