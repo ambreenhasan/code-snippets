@@ -17,15 +17,14 @@ class BingoBoard
         end
       end
       )}
+    @bingo_header = ["B", "I", "N", "G", "O"]
   end
 
   def player
-    draw until vertical_match
+    draw until horizontal_match || vertical_match || diagonal_matches
   end
 
   def draw
-    @bingo_header = ["B", "I", "N", "G", "O"]
-
     @bingo_header.length.times do |i|
         case @bingo_header[i]
         when "B"
@@ -55,30 +54,29 @@ class BingoBoard
     end
   end
 
-  def vertical_match
-    @bingo_board.each do |row|
-      return row.all? {|num| num == "X"}
-    end
+  def horizontal_match
+    "Bingo" if @bingo_board.any? {|row| row.all? {|nums| nums == "X"}}
   end
 
-  def horizontal_match
+  def vertical_match
+  end
 
+  def diagonal_matches
+    diagonal_match || diagonal_match_reversed
   end
 
   def diagonal_match
   end
 
-  def other_diagonal_match
+  def diagonal_match_reversed
   end
 
   def to_s
-    @bingo_board.each {|row| p row}
+    @bingo_board.map {|row| row.join(" ")}.join("\n")
   end
 end
 
 board = BingoBoard.new
-
 board.draw
-# p board.vertical_match
 board.player
-board.to_s
+puts board
