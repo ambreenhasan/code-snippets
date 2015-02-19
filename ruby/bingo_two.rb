@@ -21,7 +21,7 @@ class BingoBoard
   end
 
   def player
-    draw until horizontal_match || vertical_match || diagonal_matches
+    draw until horizontal_match || vertical_match || diagonal_match || diagonal_match_reversed
   end
 
   def draw
@@ -66,10 +66,6 @@ class BingoBoard
     "Bingo" if x_counter.length == 5
   end
 
-  def diagonal_matches
-    diagonal_match
-  end
-
   def diagonal_match
     x_counter = []
     index = 0
@@ -81,6 +77,13 @@ class BingoBoard
   end
 
   def diagonal_match_reversed
+    x_counter = []
+    index = 0
+    @bingo_board.each do |row|
+      x_counter << row[index + 0] if row[index + 0] == "X"
+      index += 1
+    end
+    "Bingo" if x_counter.length == 5
   end
 
   def to_s
@@ -90,6 +93,5 @@ end
 
 board = BingoBoard.new
 board.draw
-# board.vertical_match
 board.player
 puts board
