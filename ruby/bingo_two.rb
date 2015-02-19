@@ -67,10 +67,17 @@ class BingoBoard
   end
 
   def diagonal_matches
-    diagonal_match || diagonal_match_reversed
+    diagonal_match
   end
 
   def diagonal_match
+    x_counter = []
+    index = 0
+    @bingo_board.each do |row|
+      x_counter << row[-1 - index] if row[-1 - index] == "X"
+      index += 1
+    end
+    "Bingo" if x_counter.length == 5
   end
 
   def diagonal_match_reversed
